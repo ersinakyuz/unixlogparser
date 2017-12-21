@@ -9,16 +9,19 @@ __description__ = "Python parser for syslog files"
 import re, sys #re used for regexp cleaning, sys used for command line args.
 
 
-def clean(item): # clean non-numeric chars
+def clean(item):  
+    """ clean non-numeric chars"""
     item=re.sub("[^0-9]", "", item)
     return item
 
-def find_pos(line,item): #find position of the item in the given line 
+def find_pos(line,item):
+    """find position of the item in the given line"""
     liste=re.sub("=.*?[\s|\n]", " ", line).split(" ")
     pos=(liste.index(item))
     return pos
 
 def get_dicts(log_file,element):
+    """ dictionaries"""
     get_dict = {}
     linenum = 0
     for line in log_file:
@@ -33,6 +36,7 @@ def get_dicts(log_file,element):
     return get_dict
 
 def print_table(lines):
+  """printing the result"""
   widths = []
   for line in lines:
       for i,size in enumerate([len(x) for x in line]):
